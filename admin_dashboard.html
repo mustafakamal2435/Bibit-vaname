@@ -75,7 +75,7 @@
 <body>
   <header>
     <h1>Dashboard Admin - Kelola Data Petambak</h1>
-    <button onclick="logout()">Logout</button>
+    <button id="logoutBtn">Logout</button>
   </header>
 
   <main>
@@ -101,8 +101,10 @@
   </main>
 
   <script>
+    // Ambil data petambak dari localStorage
     let petambakList = JSON.parse(localStorage.getItem("dataPetambak")) || [];
 
+    // Tampilkan data ke tabel
     function renderTable() {
       const tbody = document.querySelector("#tabelPetambak tbody");
       tbody.innerHTML = "";
@@ -112,14 +114,13 @@
             <td>${index + 1}</td>
             <td>${p.nama}</td>
             <td>${p.email}</td>
-            <td>
-              <button onclick="hapusPetambak(${index})">Hapus</button>
-            </td>
+            <td><button onclick="hapusPetambak(${index})">Hapus</button></td>
           </tr>
         `;
       });
     }
 
+    // Tambah data baru
     function tambahPetambak() {
       const nama = document.getElementById("namaPetambak").value.trim();
       const email = document.getElementById("emailPetambak").value.trim();
@@ -135,6 +136,7 @@
       }
     }
 
+    // Hapus data
     function hapusPetambak(index) {
       if (confirm("Yakin ingin menghapus petambak ini?")) {
         petambakList.splice(index, 1);
@@ -143,18 +145,14 @@
       }
     }
 
-    function logout() {
-      alert("Anda telah logout.");
-      window.location.href = "index.html";
-    }
+    // Logout admin → langsung ke halaman login petambak
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      alert("Anda telah logout sebagai Admin.");
+      window.location.href = "login_petambak.html"; // arahkan ke halaman login petambak
+    });
 
+    // Jalankan render saat halaman dimuat
     renderTable();
-    <script>
-  document.getElementById('logoutBtn').addEventListener('click', function() {
-    // Bersihkan data session admin (jika ada)
-    alert("Anda telah logout sebagai Admin.");
-    window.location.href = "login_petambak.html"; // pindah ke halaman login petambak
-  });
   </script>
 </body>
 </html>
