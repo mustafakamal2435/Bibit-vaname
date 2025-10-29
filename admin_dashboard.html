@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Admin - Data Petambak</title>
+  <title>Dashboard Admin - Kelola Data Petambak</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f1faff;
       margin: 0;
-      padding: 0;
     }
     header {
       background-color: #0077b6;
@@ -101,10 +100,8 @@
   </main>
 
   <script>
-    // Ambil data petambak dari localStorage
     let petambakList = JSON.parse(localStorage.getItem("dataPetambak")) || [];
 
-    // Tampilkan data ke tabel
     function renderTable() {
       const tbody = document.querySelector("#tabelPetambak tbody");
       tbody.innerHTML = "";
@@ -120,11 +117,9 @@
       });
     }
 
-    // Tambah data baru
     function tambahPetambak() {
       const nama = document.getElementById("namaPetambak").value.trim();
       const email = document.getElementById("emailPetambak").value.trim();
-
       if (nama && email) {
         petambakList.push({ nama, email });
         localStorage.setItem("dataPetambak", JSON.stringify(petambakList));
@@ -136,7 +131,6 @@
       }
     }
 
-    // Hapus data
     function hapusPetambak(index) {
       if (confirm("Yakin ingin menghapus petambak ini?")) {
         petambakList.splice(index, 1);
@@ -145,13 +139,12 @@
       }
     }
 
-    // Logout admin → langsung ke halaman login petambak
-    document.getElementById('logoutBtn').addEventListener('click', function() {
+    // Tombol logout → ke login petambak
+    document.getElementById("logoutBtn").addEventListener("click", () => {
       alert("Anda telah logout sebagai Admin.");
-      window.location.href = "login_petambak.html"; // arahkan ke halaman login petambak
+      window.location.href = "login_petambak.html";
     });
 
-    // Jalankan render saat halaman dimuat
     renderTable();
   </script>
 </body>
