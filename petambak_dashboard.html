@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Petambak</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+    }
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    button {
+      background-color: #00b4d8;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0096c7;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard Petambak</h1>
+    <button onclick="logoutPetambak()">Logout</button>
+  </header>
+  <main>
+    <h3>Selamat datang di sistem pendukung keputusan bibit udang vaname unggul!</h3>
+    <p>Gunakan menu ini untuk memulai proses penilaian bibit atau melihat hasil rekomendasi.</p>
+  </main>
+
+  <script>
+    function logoutPetambak() {
+      alert("Anda telah logout sebagai Petambak.");
+      window.location.href = "login_petambak.html";
+    }
+  </script>
+</body>
+</html>
