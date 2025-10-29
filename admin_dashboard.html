@@ -149,6 +149,12 @@
     }
 
     renderTable();
+    <script>
+  document.getElementById('logoutBtn').addEventListener('click', function() {
+    // Bersihkan data session admin (jika ada)
+    alert("Anda telah logout sebagai Admin.");
+    window.location.href = "login_petambak.html"; // pindah ke halaman login petambak
+  });
   </script>
 </body>
 </html>
