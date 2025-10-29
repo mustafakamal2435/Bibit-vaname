@@ -2,76 +2,153 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Admin - Sistem Bibit Vaname</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - Data Petambak</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0077b6, #00b4d8);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #f1faff;
       margin: 0;
+      padding: 0;
     }
-    .login-container {
-      background: #ffffff;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
-      width: 340px;
-      text-align: center;
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    h2 {
-      color: #0077b6;
-      margin-bottom: 20px;
-    }
-    input {
-      width: 90%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
+    h1 {
+      margin: 0;
+      font-size: 20px;
     }
     button {
-      background: #0077b6;
-      color: #fff;
+      background-color: #00b4d8;
       border: none;
-      padding: 10px 20px;
+      color: white;
+      padding: 8px 14px;
       border-radius: 8px;
-      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
     }
     button:hover {
-      background: #0096c7;
+      background-color: #0096c7;
+    }
+    main {
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #0077b6;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .form-container {
+      margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login Admin</h2>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="loginAdmin()">Masuk</button>
-  </div>
+  <header>
+    <h1>Dashboard Admin - Kelola Data Petambak</h1>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h3>Tambah Petambak Baru</h3>
+      <input type="text" id="namaPetambak" placeholder="Nama Petambak">
+      <input type="email" id="emailPetambak" placeholder="Email Petambak">
+      <button onclick="tambahPetambak()">Tambah</button>
+    </div>
+
+    <h3>Daftar Petambak Terdaftar</h3>
+    <table id="tabelPetambak">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
 
   <script>
-    const ADMIN_USER = "admin";
-    const ADMIN_PASS = "12345";
+    let petambakList = JSON.parse(localStorage.getItem("dataPetambak")) || [];
 
-    function loginAdmin() {
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
+    function renderTable() {
+      const tbody = document.querySelector("#tabelPetambak tbody");
+      tbody.innerHTML = "";
+      petambakList.forEach((p, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${p.nama}</td>
+            <td>${p.email}</td>
+            <td>
+              <button onclick="hapusPetambak(${index})">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
 
-      if (user === ADMIN_USER && pass === ADMIN_PASS) {
-        alert("Login berhasil! Selamat datang, Admin.");
-        window.location.href = "admin_dashboard.html"; // Langsung ke dashboard admin
+    function tambahPetambak() {
+      const nama = document.getElementById("namaPetambak").value.trim();
+      const email = document.getElementById("emailPetambak").value.trim();
+
+      if (nama && email) {
+        petambakList.push({ nama, email });
+        localStorage.setItem("dataPetambak", JSON.stringify(petambakList));
+        renderTable();
+        document.getElementById("namaPetambak").value = "";
+        document.getElementById("emailPetambak").value = "";
       } else {
-        alert("Username atau password salah!");
+        alert("Harap isi nama dan email!");
       }
     }
+
+    function hapusPetambak(index) {
+      if (confirm("Yakin ingin menghapus petambak ini?")) {
+        petambakList.splice(index, 1);
+        localStorage.setItem("dataPetambak", JSON.stringify(petambakList));
+        renderTable();
+      }
+    }
+
+    function logout() {
+      alert("Anda telah logout.");
+      window.location.href = "index.html";
+    }
+
+    renderTable();
   </script>
 </body>
 </html>
