@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Petambak</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #a7e0e5, #d4f1f4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 320px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0077b6;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f87;
+    }
+
+    a {
+      display: block;
+      margin-top: 10px;
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login Petambak</h2>
+    <input type="text" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="loginPetambak()">Masuk</button>
+    <a href="#">Lupa Password?</a>
+    <a href="#">Daftar Akun Baru</a>
+  </div>
+
+  <script>
+    function loginPetambak() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // contoh login sederhana (nanti bisa disimpan di localStorage)
+      if (email === "petambak@gmail.com" && password === "12345") {
+        alert("Login berhasil!");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Email atau password salah!");
+      }
+    }
+  </script>
+</body>
+</html>
