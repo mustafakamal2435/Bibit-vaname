@@ -136,20 +136,19 @@
     }
 
     function hapusPetambak(index) {
-      if (confirm("Yakin ingin menghapus petambak ini?") {
+      if (confirm("Yakin ingin menghapus petambak ini?")) {
         petambakList.splice(index, 1);
-        localStorage.setItem("dataPetambak", JSON.stringify(petambakList);
+        localStorage.setItem("dataPetambak", JSON.stringify(petambakList));
         renderTable();
       }
     }
 
+    function logout() {
+      alert("Anda telah logout.");
+      window.location.href = "index.html";
+    }
+
     renderTable();
-    <button onclick="logout()">Logout</button>
-<script>
-  function logout() {
-    alert("Admin berhasil logout!");
-    window.location.href = "petambak_login.html"; // langsung ke login petambak
-  }
   </script>
 </body>
 </html>
